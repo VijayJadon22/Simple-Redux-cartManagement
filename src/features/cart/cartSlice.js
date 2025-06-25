@@ -24,9 +24,9 @@ const cartSlice = createSlice({
             saveCartToLocalStorage(state.cartItems);
         },
         removeFromCart: (state, action) => {
-            const existingItem  = state.cartItems.find((item) => item.id === action.payload.id);
-            if (existingItem .quantity > 1) {
-                existingItem .quantity -= 1;
+            const existingItem = state.cartItems.find((item) => item.id === action.payload.id);
+            if (existingItem.quantity > 1) {
+                existingItem.quantity -= 1;
             } else {
                 state.cartItems = state.cartItems.filter((item) => item.id !== action.payload.id);
             }
@@ -38,3 +38,6 @@ const cartSlice = createSlice({
         }
     }
 })
+
+export const { addToCart, removeFromCart, clearCart } = cartSlice.actions;
+export default cartSlice.reducer;
