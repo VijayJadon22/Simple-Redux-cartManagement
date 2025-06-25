@@ -1,11 +1,13 @@
 import React from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { addToCart } from "../features/cart/cartSlice";
 
 const HomePage = () => {
+  const dispatch = useDispatch();
   const { items } = useSelector((state) => state.products);
   return (
-      <div className="flex flex-col justify-center items-center w-full min-h-screen p-8">
-          <h1 className="font-bold text-3xl mt-4 mb-8">Products</h1>
+    <div className="flex flex-col justify-center items-center w-full min-h-screen p-8">
+      <h1 className="font-bold text-3xl mt-4 mb-8">Products</h1>
       <div className="md:w-xl lg:w-4xl space-y-4 md:grid md:grid-cols-3 gap-8 gap-y-10 justify-items-center">
         {items?.map((item) => (
           <div
@@ -15,7 +17,10 @@ const HomePage = () => {
             <img src={item.image} alt="product_image" className="max-w-20" />
             <p className="mt-4">{item.title}</p>
             <p className="font-bold my-2">Price: Rs.{item.price}</p>
-            <button className="py-1 px-2 bg-blue-500 rounded-lg text-white mt-auto mb-2 cursor-pointer hover:text-amber-300">
+            <button
+              onClick={() => dispatch(addToCart(item))}
+              className="py-1 px-2 bg-blue-500 rounded-lg text-white mt-auto mb-2 cursor-pointer hover:scale-105 transition-all duration-300"
+            >
               Add to cart
             </button>
           </div>
